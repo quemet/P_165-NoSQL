@@ -2,7 +2,7 @@
 
 ## A- Importer les données et le schéma de la base de données
 
-```powershell
+```bash
 docker exec -i mongo mongorestore
     --uri="mongodb://root:admin@localhost:27017"
     --authenticationDatabase="admin"
@@ -34,16 +34,56 @@ collections ;
 1.3. Gérer les indexes pour toutes les collections ;
 1.4. Gérer les rôles (et donc les utilisateurs) et leurs privilèges de cette base de données.
 
+```js
+use('db_mflix');
+
+db.createUser({
+  user: "Admin",
+  pwd: "root",
+  roles: [
+    { role: "userAdmin", db: "db_mflix"}
+  ]
+});
+```
+
 ### 2. Utilisateur
 
 2.1. Lire les informations sur les films et les commentaires ;
 2.2. Ajouter ou supprimer un ou des commentaires.
+
+```js
+use('db_mflix');
+
+db.createUser({
+  user: "User",
+  pwd: "root",
+  roles: [
+    { role: "read", db: "db_mflix", collection: "movies"},
+    { role: "readWrite", db: "db_mflix", collection: "comments"},
+    { role: "delete", db: "db_mflix", collection: "comments" }
+  ]
+});
+```
 
 ### 3. Gestionnaire
 
 3.1. Lire les informations sur tous les utilisateurs (pour savoir qui a fait un commentaire) ;
 3.2. Mettre à jour, lire et supprimer des films ou des commentaires ;
 3.3. Lire tous les commentaires.
+
+```js
+use('db_mflix');
+
+db.createUser({
+  user: "Gestionnaire",
+  pwd: "root",
+  roles: [
+    { role: "read", db: "db_mflix", collection: "users"},
+    { role: "readWrite", db: "db_mflix", collection: "comments" },
+    { role: "readWrite", db: "db_mflix", collection: "movies" }
+  ]
+});
+```
 
 ## C- Requêtes de sélection
 
@@ -249,8 +289,8 @@ db.movies.find({
 
 * 16. Lister tout les films où le réalisateur et le premier acteur sont les mêmes
 
-```javascript
-// Utilise la base de donnle db_mflix
+```js
+// Utilise la base de donnee db_mflix
 use('db_mflix');
 
 db.movies.find({
@@ -329,6 +369,56 @@ db.movies.find({}, {title: 1, year: 1, _id: 0 });
 use('db_mflix');
 
 db.movies.find({}).limit(10).skip(20);
+```
+
+* 23. Rechercher les films qui ont au moins la langue « française » ou la langue « anglaise »
+disponible, qui sont sortis à partir de « 1980 » inclus, et qui ont une note « Rotten 
+Tomatoe » de plus de 4 ou un score « IMDB » supérieur ou égal à 8. Nous voulons 
+également que « Brad Pitt » joue dans le film. Nous souhaitons n'avoir que les titres 
+pour pouvoir les afficher directement. Enfin, nous ne voulons pas que le « synopsis »
+du film parle de « nazis »
+
+```js
+use('db_mflix');
+
+db.movies.find({
+  $and: [
+    { $or: [ 
+      { languages: { $in : ["English"] } }, 
+      { languages: { $in: ["French"] } }
+    ]},
+    { year: { $gte : 1980 } },
+    { $or: [ 
+      {"tomatoes.viewer.rating": { $gt: 4 } },
+      { "imdb.rating": { $gt: 8 }} 
+    ]},
+    { cast: { $in: ["Brad Pitt"] } },
+    { fullplot: /[nazis]/}
+  ]
+}, {_id: 0, title: 1});
+```
+
+* 24.  Nous voulons maintenant trier notre résultat suivant les « notes » attribués au film. 
+D'abord par la note « Rotten Tomatoe », puis par la note « IMDB ».
+
+```js
+use('db_mflix');
+
+db.movies.find({
+  $and: [
+    { $or: [ 
+      { languages: { $in : ["English"] } }, 
+      { languages: { $in: ["French"] } }
+    ]},
+    { year: { $gte : 1980 } },
+    { $or: [ 
+      {"tomatoes.viewer.rating": { $gt: 4 } },
+      { "imdb.rating": { $gt: 8 }} 
+    ]},
+    { cast: { $in: ["Brad Pitt"] } },
+    { plot: { $not: /[nazis]/ }}
+  ]
+}, {_id: 0, title: 1}).sort("tomatoes.viewer.rating", "imdb.rating");
 ```
 
 ## D- Agrégations
