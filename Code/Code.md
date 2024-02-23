@@ -89,7 +89,7 @@ db.createUser({
 
 Lister tous les films selon les critères suivants :
 
-* 1. Lister tout les films d’action
+1. Lister tout les films d’action
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -102,7 +102,7 @@ db.movies.find({
 });
 ```
 
-* 2. Lister tout les films sortis après l’an 2000
+2. Lister tout les films sortis après l’an 2000
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -115,7 +115,7 @@ db.movies.find({
 });
 ```
 
-* 3. Lister tout les films réalisés après 2010 mais avant 2020
+3. Lister tout les films réalisés après 2010 mais avant 2020
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -130,7 +130,7 @@ db.movies.find({
 });
 ```
 
-* 4. Lister tout les films sortis dans les années 2000 mais ayant un style des années 1980
+4. Lister tout les films sortis dans les années 2000 mais ayant un style des années 1980
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -145,7 +145,7 @@ db.movies.find({
 });
 ```
 
-* 5. Lister tout les films réalisés par « Quentin Tarantino »
+5. Lister tout les films réalisés par « Quentin Tarantino »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -158,7 +158,7 @@ db.movies.find({
 });
 ```
 
-* 6. Lister tout les films de la série « Star Wars »
+6. Lister tout les films de la série « Star Wars »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -171,7 +171,7 @@ db.movies.find({
 });
 ```
 
-* 7. Lister tout les films avec un score « IMDb » supérieur à 8
+7. Lister tout les films avec un score « IMDb » supérieur à 8
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -184,7 +184,7 @@ db.movies.find({
 });
 ```
 
-* 8. Lister tout les films qui ne sont pas de genre « Horror » ou « Sci-Fi »
+8. Lister tout les films qui ne sont pas de genre « Horror » ou « Sci-Fi »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -197,7 +197,7 @@ db.movies.find({
 });
 ```
 
-* 9. Lister tout les films ayant exactement 3 différents genres
+9. Lister tout les films ayant exactement 3 différents genres
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -210,7 +210,7 @@ db.movies.find({
 });
 ```
 
-* 10. Lister tout les films dont le dernier genre est « Drama »
+10. Lister tout les films dont le dernier genre est « Drama »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -223,7 +223,7 @@ db.movies.find({
 });
 ```
 
-* 11. Lister tout les films qui durent entre 1h30 et 2h
+11. Lister tout les films qui durent entre 1h30 et 2h
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -236,7 +236,7 @@ db.movies.find({
 });
 ```
 
-* 12. Lister tout les films avec plus de 100 commentaires
+12. Lister tout les films avec plus de 100 commentaires
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -249,7 +249,7 @@ db.movies.find({
 });
 ```
 
-* 13. Lister tout les films qui ne sont pas classés « R »
+13. Lister tout les films qui ne sont pas classés « R »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -262,7 +262,7 @@ db.movies.find({
 });
 ```
 
-* 14. Lister tout les films dont le titre commence par « The »
+14. Lister tout les films dont le titre commence par « The »
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -274,7 +274,7 @@ db.movies.find({
   title: /^The/
 });
 ```
-* 15. Lister tout les films ayant reçu un certain nombre d’awards
+15. Lister tout les films ayant reçu un certain nombre d’awards
 
 ```javascript
 // Utilise la base de donnle db_mflix
@@ -287,7 +287,7 @@ db.movies.find({
 });
 ```
 
-* 16. Lister tout les films où le réalisateur et le premier acteur sont les mêmes
+16. Lister tout les films où le réalisateur et le premier acteur sont les mêmes
 
 ```js
 // Utilise la base de donnee db_mflix
@@ -304,7 +304,7 @@ db.movies.find({
 });
 ```
 
-* 17. Lister tout les films dans lesquels « Brad Pitt » et « Angelina Jolie » sont acteurs
+17. Lister tout les films dans lesquels « Brad Pitt » et « Angelina Jolie » sont acteurs
 
 ```javascript
 use('db_mflix');
@@ -317,7 +317,7 @@ db.movies.find({
 });
 ```
 
-* 18. Lister tout les films dans lesquels « Brad Pitt » est acteur et dont le nombre de commentaires est au moins égal à 100
+18. Lister tout les films dans lesquels « Brad Pitt » est acteur et dont le nombre de commentaires est au moins égal à 100
 
 ```javascript
 use('db_mflix');
@@ -330,7 +330,7 @@ db.movies.find({
 });
 ```
 
-* 19. Lister tout les films où l’acteur principal est une « femme »
+19. Lister tout les films où l’acteur principal est une « femme »
 
 ```javascript
 use("db_mflix");
@@ -340,7 +340,7 @@ db.movies.find({
 });
 ```
 
-* 20. Lister tout les films où « Tom Hanks » est acteur, mais pas « réalisateur »
+20. Lister tout les films où « Tom Hanks » est acteur, mais pas « réalisateur »
 
 ```javascript
 use('db_mflix');
@@ -353,7 +353,7 @@ db.movies.find({
 });
 ```
 
-* 21. Lister tout les films mais doivent apparaître uniquement le titre et l’année de sortie de chaque film
+21. Lister tout les films mais doivent apparaître uniquement le titre et l’année de sortie de chaque film
 
 ```javascript
 use('db_mflix');
@@ -361,7 +361,7 @@ use('db_mflix');
 db.movies.find({}, {title: 1, year: 1, _id: 0 });
 ```
 
-* 22. Dans le cadre d’une pagination qui renvoie à chaque fois une liste de 10 films par
+22. Dans le cadre d’une pagination qui renvoie à chaque fois une liste de 10 films par
     page, quel est la requête permettant de renvoyer uniquement la liste des films de la
     3e page ?
 
@@ -371,7 +371,7 @@ use('db_mflix');
 db.movies.find({}).limit(10).skip(20);
 ```
 
-* 23. Rechercher les films qui ont au moins la langue « française » ou la langue « anglaise »
+23. Rechercher les films qui ont au moins la langue « française » ou la langue « anglaise »
 disponible, qui sont sortis à partir de « 1980 » inclus, et qui ont une note « Rotten 
 Tomatoe » de plus de 4 ou un score « IMDB » supérieur ou égal à 8. Nous voulons 
 également que « Brad Pitt » joue dans le film. Nous souhaitons n'avoir que les titres 
@@ -398,7 +398,7 @@ db.movies.find({
 }, {_id: 0, title: 1});
 ```
 
-* 24.  Nous voulons maintenant trier notre résultat suivant les « notes » attribués au film. 
+24.  Nous voulons maintenant trier notre résultat suivant les « notes » attribués au film. 
 D'abord par la note « Rotten Tomatoe », puis par la note « IMDB ».
 
 ```js
