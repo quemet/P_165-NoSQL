@@ -424,12 +424,120 @@ db.movies.find({
 ## D- Agrégations
 
 1. Compter le nombre de films par genre
+
+```js
+db.movies.aggregate([
+  {
+    $unwind: "$genres"
+  },
+  {
+    $group: {
+      _id: "$genres",
+      "nbGenre": { $sum: 1 }
+    }
+  }
+]);
+```
+
 2. Compter le nombre de films par classification (rated)
+
+```js
+db.movies.aggregate([
+  {
+    $group: {
+      _id: "$rated",
+      "NbRated": { $sum: 1 }
+    }
+  }
+]);
+```
+
 3. Calculer la durée moyenne des films par genre
+
+```js
+db.movies.aggregate([
+  {
+    $unwind: "$genres"
+  },
+  {
+    $group: {
+      _id: "$genres",
+      "avgTime": { $avg: "$runtime" }
+    }
+  }
+]);
+```
+
 4. Calculer la durée moyenne des films par décennie
 5. Calculer la durée moyenne des films par acteur
+
+```js
+db.movies.aggregate([
+  {
+    $unwind: "$cast"
+  },
+  {
+    $group: {
+      _id: "$cast",
+      "avgTime": { $avg: "$runtime" }
+    }
+  }
+]);
+```
+
 6. Lister les 5 réalisateurs les plus fréquents
+
+```js
+db.movies.aggregate([
+  {
+    $unwind: "$directors"
+  },
+  {
+    $group: {
+      _id: "$directors",
+      "NbFre": { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      "NbFre": -1
+    }
+  },
+  {
+    $limit: 5
+  }
+]);
+```
+
 7. Lister les 5 acteurs les plus fréquents dans les films « PG-13 »
+
+```js
+db.movies.aggregate([
+  {
+    $match: {
+      rated: "PG-13"
+    }
+  },
+  {
+    $unwind: "$cast"
+  },
+  {
+    $group: {
+      _id: "$cast",
+      "NbActor": { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      "NbActor": -1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
 8. Quel est le nombre moyen de commentaires par film
 9. Le genre le plus populaire par année
 10. Lister les genres distincts des films
